@@ -18,14 +18,13 @@ describe('Login Functionality - OrangeHRM', () => {
         it('TC-LOGIN-002: Login dengan username case-insensitive yang valid', () => {
             cy.fixture('login').then((data) => {
                 loginPage.login('admin', data.validUser.password)
-                // Expected to fail based on test case document
                 loginPage.verifyDashboardVisible()
             })
         })
 
         it('TC-LOGIN-003: Klik Link "Forgot your password?"', () => {
             loginPage.clickForgotPassword()
-            loginPage.verifyForgotPasswordPage() // Sekarang menggunakan validasi URL
+            loginPage.verifyForgotPasswordPage()
         })
     })
 

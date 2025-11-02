@@ -57,11 +57,9 @@ class LoginPage {
     }
 
     verifyForgotPasswordPage() {
-        // Validasi berdasarkan URL - lebih reliable
         cy.url().should('include', '/auth/requestPasswordResetCode')
     }
 
-    // Bonus: Tambahkan method untuk verifikasi URL login page juga
     verifyLoginPage() {
         cy.url().should('include', '/auth/login')
     }
