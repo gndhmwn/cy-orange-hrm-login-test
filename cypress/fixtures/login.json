@@ -1,0 +1,40 @@
+{
+  "validUser": {
+    "username": "Admin",
+    "password": "admin123"
+  },
+  "invalidUsers": {
+    "validUsernameInvalidPassword": {
+      "username": "Admin",
+      "password": "wrongpass"
+    },
+    "invalidUsernameValidPassword": {
+      "username": "wronguser",
+      "password": "admin123"
+    }
+  },
+  "securityPayloads": {
+    "sqlInjection": {
+      "username": "Admin ' OR 1=1#",
+      "password": "admin123"
+    },
+    "xss": {
+      "username": "<script>alert(1)</script>",
+      "password": "admin123"
+    }
+  },
+  "emptyFields": {
+    "usernameOnly": {
+      "username": "Admin",
+      "password": ""
+    },
+    "passwordOnly": {
+      "username": "",
+      "password": "admin123"
+    },
+    "bothEmpty": {
+      "username": "",
+      "password": ""
+    }
+  }
+}
