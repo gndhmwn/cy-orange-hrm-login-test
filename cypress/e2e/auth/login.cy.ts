@@ -1,6 +1,6 @@
 import LoginPage from '../../pages/LoginPage'
 
-describe('Login Functionality - OrangeHRM', () => {
+describe('Login Feature - OrangeHRM', () => {
     const loginPage = new LoginPage()
 
     beforeEach(() => {
