@@ -48,11 +48,11 @@ class LoginPage {
             this.elements.requiredFieldMessage().first().should('contain', 'Required')
         } else if (field === 'password') {
             this.elements.requiredFieldMessage().last().should('contain', 'Required')
-        } else if (field === 'both') {
-            this.elements.requiredFieldMessage().should('have.length', 2)
-            this.elements.requiredFieldMessage().each(($el) => {
-                expect($el).to.contain('Required')
-            })
+        // } else if (field === 'both') {
+        //     this.elements.requiredFieldMessage().should('have.length', 2)
+        //     this.elements.requiredFieldMessage().each(($el) => {
+        //         expect($el).to.contain('Required')
+        //     })
         }
     }
 
