@@ -1,18 +1,13 @@
 {
-  "validUser": {
+  "validCredentials": {
     "username": "Admin",
     "password": "admin123",
     "status_code": 200
   },
-  "invalidUsers": {
-    "validUsernameInvalidPassword": {
-      "username": "Admin",
-      "password": "wrongpass"
-    },
-    "invalidUsernameValidPassword": {
-      "username": "wronguser",
-      "password": "admin123"
-    }
+  "invalidCredentials": {
+    "username": "wronguser",
+    "password": "wrongpass",
+    "status_code": 304
   },
   "securityPayloads": {
     "sqlInjection": {

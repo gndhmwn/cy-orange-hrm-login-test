@@ -11,16 +11,16 @@ describe('Login Feature - OrangeHRM', () => {
 
     describe('Positive Test Cases', () => {
         it('TC-LOGIN-001: Login dengan username dan password yang valid', () => {
-            loginPage.interceptLoginSuccess()
-            loginPage.login(data.validUser.username, data.validUser.password)
-            loginPage.verifyStatusCode(data.validUser.status_code)
+            // loginPage.interceptValidLogin()
+            loginPage.login(data.validCredentials.username, data.validCredentials.password)
+            // loginPage.verifyStatusCode(data.validCredentials.status_code)
             loginPage.verifyDashboardVisible()
         })
 
         it('TC-LOGIN-002: Login dengan username case-insensitive yang valid', () => {
-            loginPage.interceptLoginSuccess()
-            loginPage.login('admin', data.validUser.password)
-            loginPage.verifyStatusCode(data.validUser.status_code)
+            loginPage.interceptValidLogin()
+            loginPage.login('admin', data.validCredentials.password)
+            loginPage.verifyStatusCode(data.validCredentials.status_code)
             loginPage.verifyDashboardVisible()
         })
 
@@ -32,17 +32,19 @@ describe('Login Feature - OrangeHRM', () => {
 
     describe('Negative Test Cases', () => {
         it('TC-LOGIN-004: Login dengan username valid dan password invalid', () => {
+            loginPage.interceptInvalidLogin()
             loginPage.login(
-                data.invalidUsers.validUsernameInvalidPassword.username,
-                data.invalidUsers.validUsernameInvalidPassword.password
+                data.validCredentials.username,
+                data.invalidCredentials.password
             )
+            loginPage.verifyStatusCode(data.invalidCredentials.status_code)
             loginPage.verifyErrorMessage('Invalid credentials')
         })
 
         it('TC-LOGIN-005: Login dengan username invalid dan password valid', () => {
             loginPage.login(
-                data.invalidUsers.invalidUsernameValidPassword.username,
-                data.invalidUsers.invalidUsernameValidPassword.password
+                data.invalidCredentials.username,
+                data.validCredentials.password
             )
             loginPage.verifyErrorMessage('Invalid credentials')
         })

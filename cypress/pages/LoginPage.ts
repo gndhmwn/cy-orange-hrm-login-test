@@ -14,10 +14,17 @@ class LoginPage {
         cy.visit('/web/index.php/auth/login')
     }
 
-    interceptLoginSuccess() {
+    interceptValidLogin() {
         cy.intercept(
             'GET', 
-            '**/api/v2/dashboard/shortcuts'
+            '**/api/v2/dashboard/employees/locations'
+        ).as('loginRequest')
+    }
+
+    interceptInvalidLogin() {
+        cy.intercept(
+            'GET', 
+            '**/core/i18n/messages'
         ).as('loginRequest')
     }
 
