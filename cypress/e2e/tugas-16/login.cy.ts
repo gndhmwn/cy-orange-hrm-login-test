@@ -6,20 +6,21 @@ describe('Login Feature - OrangeHRM', () => {
 
     beforeEach(() => {
         loginPage.visit()
-        loginPage.interceptLoginRequest()
         cy.fixture('login.json').then((loginData) => data = loginData);
     })
 
     describe('Positive Test Cases', () => {
         it('TC-LOGIN-001: Login dengan username dan password yang valid', () => {
-            loginPage.interceptLoginRequest()
+            loginPage.interceptLoginSuccess()
             loginPage.login(data.validUser.username, data.validUser.password)
             loginPage.verifyStatusCode(data.validUser.status_code)
             loginPage.verifyDashboardVisible()
         })
 
         it('TC-LOGIN-002: Login dengan username case-insensitive yang valid', () => {
+            loginPage.interceptLoginSuccess()
             loginPage.login('admin', data.validUser.password)
+            loginPage.verifyStatusCode(data.validUser.status_code)
             loginPage.verifyDashboardVisible()
         })
 

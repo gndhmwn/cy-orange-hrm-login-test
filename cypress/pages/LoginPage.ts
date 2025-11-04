@@ -14,8 +14,11 @@ class LoginPage {
         cy.visit('/web/index.php/auth/login')
     }
 
-    interceptLoginRequest() {
-        cy.intercept('GET', '**/api/v2/dashboard/employees/locations').as('loginRequest')
+    interceptLoginSuccess() {
+        cy.intercept(
+            'GET', 
+            '**/api/v2/dashboard/shortcuts'
+        ).as('loginRequest')
     }
 
     typeUsername(username) {
@@ -40,11 +43,8 @@ class LoginPage {
         this.clickLogin()
     }
 
-    // verifyStatusCode(expectedCode) {
-    //     this.elements.statusCode().should('eq', expectedCode)
-    // }
     verifyStatusCode(code: number) {
-        cy.wait('@loginRequest').its('response.statusCode').should('eq', code)
+        cy.wait('@loginRequest', { timeout: 15000 }).its('response.statusCode').should('eq', code)
       }
 
     verifyDashboardVisible() {
