@@ -1,7 +1,8 @@
 {
   "validUser": {
     "username": "Admin",
-    "password": "admin123"
+    "password": "admin123",
+    "status_code": 200
   },
   "invalidUsers": {
     "validUsernameInvalidPassword": {

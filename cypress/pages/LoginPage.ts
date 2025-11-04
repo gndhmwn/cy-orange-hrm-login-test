@@ -5,12 +5,17 @@ class LoginPage {
         loginButton: () => cy.get('button[type="submit"]'),
         forgotPasswordLink: () => cy.contains('Forgot your password?'),
         dashboardHeader: () => cy.contains('Dashboard'),
+        statusCode: () => cy.wait('@loginRequest').its('response.statusCode'),
         errorMessage: () => cy.get('.oxd-alert-content-text'),
         requiredFieldMessage: () => cy.get('.oxd-input-field-error-message')
     }
 
     visit() {
         cy.visit('/web/index.php/auth/login')
+    }
+
+    interceptLoginRequest() {
+        cy.intercept('GET', '**/api/v2/dashboard/employees/locations').as('loginRequest')
     }
 
     typeUsername(username) {
@@ -35,6 +40,13 @@ class LoginPage {
         this.clickLogin()
     }
 
+    // verifyStatusCode(expectedCode) {
+    //     this.elements.statusCode().should('eq', expectedCode)
+    // }
+    verifyStatusCode(code: number) {
+        cy.wait('@loginRequest').its('response.statusCode').should('eq', code)
+      }
+
     verifyDashboardVisible() {
         this.elements.dashboardHeader().should('be.visible')
     }
@@ -48,11 +60,11 @@ class LoginPage {
             this.elements.requiredFieldMessage().first().should('contain', 'Required')
         } else if (field === 'password') {
             this.elements.requiredFieldMessage().last().should('contain', 'Required')
-        // } else if (field === 'both') {
-        //     this.elements.requiredFieldMessage().should('have.length', 2)
-        //     this.elements.requiredFieldMessage().each(($el) => {
-        //         expect($el).to.contain('Required')
-        //     })
+            // } else if (field === 'both') {
+            //     this.elements.requiredFieldMessage().should('have.length', 2)
+            //     this.elements.requiredFieldMessage().each(($el) => {
+            //         expect($el).to.contain('Required')
+            //     })
         }
     }
 
