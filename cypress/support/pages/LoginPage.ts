@@ -21,6 +21,13 @@ class LoginPage {
         ).as('loginRequest')
     }
 
+    interceptNullLogin() {
+        cy.intercept(
+            'GET', 
+            '**/core/i18n/messages'
+        ).as('loginRequest')
+    }
+
     interceptInvalidLogin() {
         cy.intercept(
             'GET', 

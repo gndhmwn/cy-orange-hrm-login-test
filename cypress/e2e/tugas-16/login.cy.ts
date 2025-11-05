@@ -1,4 +1,4 @@
-import LoginPage from '../../pages/LoginPage'
+import LoginPage from '../../support/pages/LoginPage'
 
 describe('Login Feature - OrangeHRM', () => {
     const loginPage = new LoginPage()
@@ -11,9 +11,9 @@ describe('Login Feature - OrangeHRM', () => {
 
     describe('Positive Test Cases', () => {
         it('TC-LOGIN-001: Login dengan username dan password yang valid', () => {
-            // loginPage.interceptValidLogin()
+            loginPage.interceptValidLogin()
             loginPage.login(data.validCredentials.username, data.validCredentials.password)
-            // loginPage.verifyStatusCode(data.validCredentials.status_code)
+            loginPage.verifyStatusCode(data.validCredentials.status_code)
             loginPage.verifyDashboardVisible()
         })
 
@@ -42,10 +42,12 @@ describe('Login Feature - OrangeHRM', () => {
         })
 
         it('TC-LOGIN-005: Login dengan username invalid dan password valid', () => {
+            loginPage.interceptInvalidLogin()
             loginPage.login(
                 data.invalidCredentials.username,
                 data.validCredentials.password
             )
+            loginPage.verifyStatusCode(data.invalidCredentials.status_code)
             loginPage.verifyErrorMessage('Invalid credentials')
         })
 
